@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_fragment"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/wifi_fragment"
+        android:title="@string/wifi" />
+    <item
+        android:id="@+id/send_fragment"
+        android:title="@string/send" />
+</menu>
