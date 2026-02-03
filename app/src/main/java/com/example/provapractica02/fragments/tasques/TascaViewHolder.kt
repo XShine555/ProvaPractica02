@@ -8,7 +8,9 @@ import com.example.provapractica02.R
 import com.example.provapractica02.models.Estat
 import com.example.provapractica02.models.Tasca
 
-class TascaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TascaViewHolder(
+    itemView: View, private val onTascaClick: (Tasca) -> Unit
+) : RecyclerView.ViewHolder(itemView) {
     private val tvNom = itemView.findViewById<TextView>(R.id.tvNom)
     private val tvCategoria = itemView.findViewById<TextView>(R.id.tvCategoria)
     private val tvData = itemView.findViewById<TextView>(R.id.tvData)
@@ -24,8 +26,10 @@ class TascaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             when (tasca.estat) {
                 Estat.EnCurs -> Color.parseColor("#2196F3")
                 Estat.NoComencada -> Color.parseColor("#FF9800")
-                else -> Color.parseColor("#4CAF50")
+                Estat.Finalitzada -> Color.parseColor("#4CAF50")
             }
         )
+
+        itemView.setOnClickListener { onTascaClick(tasca) }
     }
 }

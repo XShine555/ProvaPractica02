@@ -1,7 +1,6 @@
 package com.example.provapractica02.fragments.tasques
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.provapractica02.R
+import com.example.provapractica02.fragments.editarTasca.EditarTascaFragment
 import com.example.provapractica02.models.Categoria
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -18,7 +18,7 @@ class TasquesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var chipGroup: ChipGroup
     private lateinit var toolbar: Toolbar
-    private val adapter = TasquesAdapter()
+    private lateinit var adapter: TasquesAdapter
     private var categoriaSeleccionada: Categoria? = null
 
     override fun onCreateView(
@@ -43,6 +43,20 @@ class TasquesFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        adapter = TasquesAdapter { tasca ->
+            val bundle = Bundle().apply {
+                putInt("tasca_id", tasca.id)
+            }
+
+            val fragment = EditarTascaFragment()
+            fragment.arguments = bundle
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }

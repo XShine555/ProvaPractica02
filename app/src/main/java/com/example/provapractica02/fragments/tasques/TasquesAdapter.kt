@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.provapractica02.R
 import com.example.provapractica02.models.Tasca
 
-class TasquesAdapter : RecyclerView.Adapter<TascaViewHolder>() {
+class TasquesAdapter(
+    private val onTascaClick: (Tasca) -> Unit
+) : RecyclerView.Adapter<TascaViewHolder>() {
 
     private var tasques = listOf<Tasca>()
 
@@ -17,7 +19,7 @@ class TasquesAdapter : RecyclerView.Adapter<TascaViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TascaViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tasca, parent, false)
-        return TascaViewHolder(view)
+        return TascaViewHolder(view, onTascaClick)
     }
 
     override fun onBindViewHolder(holder: TascaViewHolder, position: Int) {
